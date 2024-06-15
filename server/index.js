@@ -1,8 +1,27 @@
 const { Server } = require("socket.io");
 
+//code added for hosting purpose
+// const express = require('express');
+// const http = require('http');
+// const path = require('path');
+
+// const app = express();
+// const server = http.createServer(app);
+
+// const PORT = process.env.PORT || 8000;
+
+// const io = new Server(server, {
+//     cors: {
+//         origin: "*",
+//         methods: ["GET", "POST"]
+//     }
+// });
+
+
 const io = new Server(8000, {
   cors: true,
 });
+
 
 const emailToSocketIdMap = new Map();
 const socketidToEmailMap = new Map();
