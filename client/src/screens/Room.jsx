@@ -2,6 +2,9 @@ import React, { useEffect, useCallback, useState } from "react";
 import ReactPlayer from "react-player";
 import peer from "../service/peer";
 import { useSocket } from "../context/SocketProvider";
+import '../RoomPage.css';  // Import the CSS file for styling
+
+
 
 const RoomPage = () => {
   const socket = useSocket();
@@ -109,36 +112,35 @@ const RoomPage = () => {
     handleNegoNeedFinal,
   ]);
 
-  return (
-    <div>
+   return (
+    <div className="room-page">
       <h1>Room Page</h1>
       <h4>{remoteSocketId ? "Connected" : "No one in room"}</h4>
       {myStream && <button onClick={sendStreams}>Send Stream</button>}
       {remoteSocketId && <button onClick={handleCallUser}>CALL</button>}
-      {myStream && (
-        <>
-          <h1>My Stream</h1>
-          <center><ReactPlayer
-            playing
-            muted
-            height="400px"
-            width="200px"
-            url={myStream}
-          /></center>
-        </>
-      )}
-      {remoteStream && (
-        <>
-          <h1>Remote Stream</h1>
-          <center><ReactPlayer
-            playing
-            muted
-            height="400px"
-            width="200px"
-            url={remoteStream}
-          /></center>
-        </>
-      )}
+      <div className="video-container">
+        {myStream && (
+          <div className="video-wrapper">
+            <h2>My Stream</h2>
+            <ReactPlayer
+              playing
+              muted
+              className="video-player"
+              url={myStream}
+            />
+          </div>
+        )}
+        {remoteStream && (
+          <div className="video-wrapper">
+            <h2>Remote Stream</h2>
+            <ReactPlayer
+              playing
+              className="video-player"
+              url={remoteStream}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
